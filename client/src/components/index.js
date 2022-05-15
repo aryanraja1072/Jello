@@ -1,6 +1,6 @@
-import AlertBox from "./AlertBox";
+import Alert from "./Alert";
 import FormRow from "./FormRow";
 import Logo from "./Logo";
 import NavigationBar from "./NavigationBar";
 
-export { AlertBox, FormRow, Logo, NavigationBar };
+export { Alert, FormRow, Logo, NavigationBar };
