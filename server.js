@@ -12,6 +12,9 @@ import auth from './middleware/auth.js';
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import path from 'path'
+import helmet from 'helmet'
+import xss from 'xss-clean'
+import mongoSanitize from 'express-mongo-sanitize'
 
 dotenv.config()
 
@@ -24,6 +27,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 app.use(cors())
 app.use(express.json())
+app.use(helmet())
+app.use(xss())
+app.use(mongoSanitize())
 app.use(express.static(path.resolve(__dirname, './client/build')))
 
 app.use('/api/v1/auth', authRouter);
