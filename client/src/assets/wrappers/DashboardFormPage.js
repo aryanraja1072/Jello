@@ -45,6 +45,12 @@ const Wrapper = styled.section`
   .clear-btn:hover {
     background: var(--black);
   }
+  .done-btn {
+    background: var(--green);
+  }
+  .done-btn:hover {
+    background: var(--dark-green);
+  }
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;

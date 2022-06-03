@@ -4,13 +4,15 @@ import { useState, useEffect } from 'react'
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Alert, FormRow, Logo } from '../components';
 import { useAppContext } from '../context'
+import { useNavigate } from 'react-router-dom';
 
 /*
 
 TODO:
 
 FIXME:
-- Null context object is recvd when register page is the first page to be loaded
+
+
 
 */
 
@@ -25,8 +27,16 @@ const InitialState = {
 
 const Register = () => {
     const [values, setValues] = useState(InitialState);
-    const { isLoading, showAlert, displayAlert, registerUser } = useAppContext();
-
+    const {
+        user,
+        isLoading,
+        showAlert,
+        displayAlert,
+        registerUser,
+        loginUser,
+        addUserToLocalStorage,
+        removeUserFromLocalStorage } = useAppContext();
+    const navigate = useNavigate();
     const toggleMember = () => {
         setValues({ ...values, isMember: !values.isMember })
     }
@@ -44,11 +54,21 @@ const Register = () => {
         const currentUser = { name, email, password };
         if (isMember) {
             console.log("Already a member");
+            loginUser(currentUser);
         } else {
             registerUser(currentUser);
         }
 
     }
+
+    useEffect(() => {
+        if (user) {
+            setTimeout(() => {
+                navigate('/');
+            }, 3000)
+        }
+    }, [user, navigate])
+
     return (
         <Wrapper className='full-page'>
             <form className='form' onSubmit={onSubmit}>
